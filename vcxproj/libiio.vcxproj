@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\iio\backend.c" />
+    <ClCompile Include="..\src\iio\buffer.c" />
+    <ClCompile Include="..\src\iio\channel.c" />
+    <ClCompile Include="..\src\iio\context.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\core.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\descriptor.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\hotplug.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\io.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\os\events_windows.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\os\threads_windows.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\os\windows_common.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\os\windows_usbdk.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\os\windows_winusb.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\strerror.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\sync.c" />
+    <ClCompile Include="..\src\iio\deps\mdns\mdns.c" />
+    <ClCompile Include="..\src\iio\device.c" />
+    <ClCompile Include="..\src\iio\dns_sd.c" />
+    <ClCompile Include="..\src\iio\dns_sd_windows.c" />
+    <ClCompile Include="..\src\iio\iiod-client.c" />
+    <ClCompile Include="..\src\iio\lock.c" />
+    <ClCompile Include="..\src\iio\network-windows.c" />
+    <ClCompile Include="..\src\iio\network.c" />
+    <ClCompile Include="..\src\iio\scan.c" />
+    <ClCompile Include="..\src\iio\sort.c" />
+    <ClCompile Include="..\src\iio\usb.c" />
+    <ClCompile Include="..\src\iio\utilities.c" />
+    <ClCompile Include="..\src\iio\xml.cpp" />
+    <ClCompile Include="..\src\main_libiio.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\libiio.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Common\tdMemLite.hpp" />
+    <ClInclude Include="..\src\Common\tdXML.hpp" />
+    <ClInclude Include="..\src\iio\debug.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\config.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\libusb.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\libusbi.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\os\events_windows.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\os\threads_windows.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\os\windows_common.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\os\windows_usbdk.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\os\windows_winusb.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\version.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\version_nano.h" />
+    <ClInclude Include="..\src\iio\deps\mdns\mdns.h" />
+    <ClInclude Include="..\src\iio\dns_sd.h" />
+    <ClInclude Include="..\src\iio\iio-backend.h" />
+    <ClInclude Include="..\src\iio\iio-config.h" />
+    <ClInclude Include="..\src\iio\iio-lock.h" />
+    <ClInclude Include="..\src\iio\iio-private.h" />
+    <ClInclude Include="..\src\iio\iio.h" />
+    <ClInclude Include="..\src\iio\iiod-client.h" />
+    <ClInclude Include="..\src\iio\network.h" />
+    <ClInclude Include="..\src\iio\sort.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A375005E-2FC8-4AEE-94E6-7714251E2FE8}</ProjectGuid>
+    <Keyword>Win64Proj</Keyword>
+    <RootNamespace>libiio</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\</LocalDebuggerWorkingDirectory>
+    <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\</LocalDebuggerWorkingDirectory>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\$(ProjectName)</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\</LocalDebuggerWorkingDirectory>
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\</LocalDebuggerWorkingDirectory>
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)_$(PlatformTarget)\$(ProjectName)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>LIBIIO_EXPORTS;WIN32;_DEBUG;_WINDOWS;_USRDLL;DLL_PROJ_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ModuleDefinitionFile>..\src\libiio.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>LIBIIO_EXPORTS;WIN32;_DEBUG;_WINDOWS;_USRDLL;DLL_PROJ_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ModuleDefinitionFile>..\src\libiio.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MinSpace</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PreprocessorDefinitions>_NO_CRT_STDIO_INLINE ;LIBIIO_EXPORTS;WIN32;NDEBUG;_WINDOWS;_USRDLL;DLL_PROJ_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ModuleDefinitionFile>..\src\libiio.def</ModuleDefinitionFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <NoEntryPoint>false</NoEntryPoint>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MinSpace</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PreprocessorDefinitions>_NO_CRT_STDIO_INLINE ;LIBIIO_EXPORTS;WIN32;NDEBUG;_WINDOWS;_USRDLL;DLL_PROJ_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ModuleDefinitionFile>..\src\libiio.def</ModuleDefinitionFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <NoEntryPoint>false</NoEntryPoint>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
