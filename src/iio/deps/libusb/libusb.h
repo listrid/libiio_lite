@@ -2264,7 +2264,7 @@ typedef void (LIBUSB_CALL *libusb_pollfd_added_cb)(int fd, short events,
 typedef void (LIBUSB_CALL *libusb_pollfd_removed_cb)(int fd, void *user_data);
 
 const struct libusb_pollfd ** LIBUSB_CALL libusb_get_pollfds(
-	libusb_context *ctx);
+	libusb_context *gIIO_ctx);
 void LIBUSB_CALL libusb_free_pollfds(const struct libusb_pollfd **pollfds);
 void LIBUSB_CALL libusb_set_pollfd_notifiers(libusb_context *ctx,
 	libusb_pollfd_added_cb added_cb, libusb_pollfd_removed_cb removed_cb,

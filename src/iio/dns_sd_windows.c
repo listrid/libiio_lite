@@ -8,7 +8,7 @@
  * Based on https://github.com/mjansson/mdns/blob/main/mdns.c
  * which should be sync'ed with the mdns.h file and is Licensed under Public Domain
  */
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <errno.h>
 #include <winsock2.h>

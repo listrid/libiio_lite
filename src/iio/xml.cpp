@@ -5,6 +5,8 @@
  * Copyright (C) 2014 Analog Devices, Inc.
  * Author: Paul Cercueil <paul.cercueil@analog.com>
  */
+#define _CRT_SECURE_NO_WARNINGS
+
 extern "C"
 {
 #include "debug.h"

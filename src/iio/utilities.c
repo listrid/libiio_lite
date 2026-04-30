@@ -8,7 +8,7 @@
 
 /* Force the XSI version of strerror_r */
 #undef _GNU_SOURCE
-
+#define _CRT_SECURE_NO_WARNINGS
 #include "dns_sd.h"
 #include "iio-config.h"
 #include "iio-private.h"

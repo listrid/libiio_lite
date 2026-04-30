@@ -19,44 +19,98 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\utils\gen_code.c" />
-    <ClCompile Include="..\src\utils\iio_common.c" />
-    <ClCompile Include="..\src\utils\iio_readdev.c" />
-    <ClCompile Include="..\src\utils\wingetopt\getopt.c" />
+    <ClCompile Include="..\src\ExtIO_Pluto\ExtIO_Pluto.cpp" />
+    <ClCompile Include="..\src\iio\backend.c" />
+    <ClCompile Include="..\src\iio\buffer.c" />
+    <ClCompile Include="..\src\iio\channel.c" />
+    <ClCompile Include="..\src\iio\context.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\core.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\descriptor.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\hotplug.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\io.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\os\events_windows.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\os\threads_windows.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\os\windows_common.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\os\windows_usbdk.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\os\windows_winusb.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\strerror.c" />
+    <ClCompile Include="..\src\iio\deps\libusb\sync.c" />
+    <ClCompile Include="..\src\iio\deps\mdns\mdns.c" />
+    <ClCompile Include="..\src\iio\device.c" />
+    <ClCompile Include="..\src\iio\dns_sd.c" />
+    <ClCompile Include="..\src\iio\dns_sd_windows.c" />
+    <ClCompile Include="..\src\iio\iiod-client.c" />
+    <ClCompile Include="..\src\iio\lock.c" />
+    <ClCompile Include="..\src\iio\network-windows.c" />
+    <ClCompile Include="..\src\iio\network.c" />
+    <ClCompile Include="..\src\iio\scan.c" />
+    <ClCompile Include="..\src\iio\sort.c" />
+    <ClCompile Include="..\src\iio\usb.c" />
+    <ClCompile Include="..\src\iio\utilities.c" />
+    <ClCompile Include="..\src\iio\xml.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\utils\gen_code.h" />
-    <ClInclude Include="..\src\utils\iio_common.h" />
-    <ClInclude Include="..\src\utils\wingetopt\getopt.h" />
+    <ClInclude Include="..\include\iio.h" />
+    <ClInclude Include="..\src\Common\tdMemLite.hpp" />
+    <ClInclude Include="..\src\Common\tdXML.hpp" />
+    <ClInclude Include="..\src\ExtIO_Pluto\ExtIO_Pluto.h" />
+    <ClInclude Include="..\src\ExtIO_Pluto\LC_ExtIO_Types.h" />
+    <ClInclude Include="..\src\ExtIO_Pluto\resource.h" />
+    <ClInclude Include="..\src\iio\debug.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\config.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\libusb.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\libusbi.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\os\events_windows.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\os\threads_windows.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\os\windows_common.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\os\windows_usbdk.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\os\windows_winusb.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\version.h" />
+    <ClInclude Include="..\src\iio\deps\libusb\version_nano.h" />
+    <ClInclude Include="..\src\iio\deps\mdns\mdns.h" />
+    <ClInclude Include="..\src\iio\dns_sd.h" />
+    <ClInclude Include="..\src\iio\iio-backend.h" />
+    <ClInclude Include="..\src\iio\iio-config.h" />
+    <ClInclude Include="..\src\iio\iio-lock.h" />
+    <ClInclude Include="..\src\iio\iio-private.h" />
+    <ClInclude Include="..\src\iio\iio.h" />
+    <ClInclude Include="..\src\iio\iiod-client.h" />
+    <ClInclude Include="..\src\iio\network.h" />
+    <ClInclude Include="..\src\iio\sort.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\src\ExtIO_Pluto\resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\ExtIO_Pluto.def" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C73F9698-B6CC-431F-8E4A-A218C29CC8B4}</ProjectGuid>
+    <ProjectGuid>{4AE8FFCE-E915-4B8B-B881-880899864D8E}</ProjectGuid>
     <Keyword>Win64Proj</Keyword>
-    <RootNamespace>iio_attr</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <RootNamespace>libiio</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -107,12 +161,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EXTIO_EXPORTS;LIBIIO_STATIC;WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ModuleDefinitionFile>..\src\ExtIO_Pluto.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -120,12 +175,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EXTIO_EXPORTS;LIBIIO_STATIC;WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ModuleDefinitionFile>..\src\ExtIO_Pluto.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -134,21 +190,22 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_NO_CRT_STDIO_INLINE ;EXTIO_EXPORTS;LIBIIO_STATIC;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ExceptionHandling>false</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <ModuleDefinitionFile>..\src\ExtIO_Pluto.def</ModuleDefinitionFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <NoEntryPoint>false</NoEntryPoint>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -157,21 +214,22 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_NO_CRT_STDIO_INLINE ;EXTIO_EXPORTS;LIBIIO_STATIC;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ExceptionHandling>false</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <ModuleDefinitionFile>..\src\ExtIO_Pluto.def</ModuleDefinitionFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <NoEntryPoint>false</NoEntryPoint>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

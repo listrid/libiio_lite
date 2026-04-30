@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="libiio">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ExtIO_Pluto">
+      <UniqueIdentifier>{c7aa6831-554b-4752-a798-67b43147c3bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libiio\deps">
+      <UniqueIdentifier>{8f332626-4b2f-494b-bff8-52d4a37911e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libiio\deps\mdns">
+      <UniqueIdentifier>{5fdeb2b2-aeda-476c-9eff-01650298aac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libiio\deps\libusb">
+      <UniqueIdentifier>{34087088-4b88-4ab7-ac6d-fed5e2cb6c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libiio\deps\libusb\os">
+      <UniqueIdentifier>{e240fafe-8103-49fb-9209-a57195397b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libiio\h">
+      <UniqueIdentifier>{437122a9-e210-4138-9ec9-d7043716c0df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libiio\Common">
+      <UniqueIdentifier>{2b48d2f5-ca0c-452f-8221-650849160fdf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\iio\deps\mdns\mdns.c">
+      <Filter>libiio\deps\mdns</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\core.c">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\descriptor.c">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\hotplug.c">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\io.c">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\strerror.c">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\sync.c">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\os\events_windows.c">
+      <Filter>libiio\deps\libusb\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\os\threads_windows.c">
+      <Filter>libiio\deps\libusb\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\os\windows_common.c">
+      <Filter>libiio\deps\libusb\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\os\windows_usbdk.c">
+      <Filter>libiio\deps\libusb\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\deps\libusb\os\windows_winusb.c">
+      <Filter>libiio\deps\libusb\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\backend.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\buffer.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\channel.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\context.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\device.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\dns_sd.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\dns_sd_windows.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\iiod-client.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\lock.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\network.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\network-windows.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\scan.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\sort.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\usb.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\utilities.c">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\iio\xml.cpp">
+      <Filter>libiio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ExtIO_Pluto\ExtIO_Pluto.cpp">
+      <Filter>ExtIO_Pluto</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\iio\debug.h">
+      <Filter>libiio\h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\dns_sd.h">
+      <Filter>libiio\h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\iio-backend.h">
+      <Filter>libiio\h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\iio-config.h">
+      <Filter>libiio\h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\iio-lock.h">
+      <Filter>libiio\h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\iio-private.h">
+      <Filter>libiio\h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\iio.h">
+      <Filter>libiio\h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\iiod-client.h">
+      <Filter>libiio\h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\network.h">
+      <Filter>libiio\h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\mdns\mdns.h">
+      <Filter>libiio\deps\mdns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\libusb\config.h">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\libusb\libusb.h">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\libusb\libusbi.h">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\libusb\version.h">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\libusb\version_nano.h">
+      <Filter>libiio\deps\libusb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\libusb\os\events_windows.h">
+      <Filter>libiio\deps\libusb\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\libusb\os\threads_windows.h">
+      <Filter>libiio\deps\libusb\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\libusb\os\windows_common.h">
+      <Filter>libiio\deps\libusb\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\libusb\os\windows_usbdk.h">
+      <Filter>libiio\deps\libusb\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\deps\libusb\os\windows_winusb.h">
+      <Filter>libiio\deps\libusb\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Common\tdMemLite.hpp">
+      <Filter>libiio\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Common\tdXML.hpp">
+      <Filter>libiio\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\iio\sort.h">
+      <Filter>libiio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ExtIO_Pluto\ExtIO_Pluto.h">
+      <Filter>ExtIO_Pluto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ExtIO_Pluto\LC_ExtIO_Types.h">
+      <Filter>ExtIO_Pluto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ExtIO_Pluto\resource.h">
+      <Filter>ExtIO_Pluto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iio.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\src\ExtIO_Pluto\resource.rc">
+      <Filter>ExtIO_Pluto</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\ExtIO_Pluto.def">
+      <Filter>ExtIO_Pluto</Filter>
+    </None>
+  </ItemGroup>
+</Project>

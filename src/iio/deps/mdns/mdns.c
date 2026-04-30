@@ -188,7 +188,7 @@ service_callback(int sock, const struct sockaddr* from, size_t addrlen, mdns_ent
 	const char dns_sd[] = "_services._dns-sd._udp.local.";
 	const service_t* service = (const service_t*)user_data;
 
-	mdns_string_t fromaddrstr = ip_address_to_string(addrbuffer, sizeof(addrbuffer), from, addrlen);
+	//mdns_string_t fromaddrstr = ip_address_to_string(addrbuffer, sizeof(addrbuffer), from, addrlen);
 
 	size_t offset = name_offset;
 	mdns_string_t name = mdns_string_extract(data, size, &offset, namebuffer, sizeof(namebuffer));

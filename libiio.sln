@@ -37,6 +37,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iio_genxml", "vcxproj\iio_g
 		{A375005E-2FC8-4AEE-94E6-7714251E2FE8} = {A375005E-2FC8-4AEE-94E6-7714251E2FE8}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExtIO_Pluto", "vcxproj\ExtIO_Pluto.vcxproj", "{4AE8FFCE-E915-4B8B-B881-880899864D8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -101,6 +103,14 @@ Global
 		{23D66574-48C0-40EC-8F4D-4CB602F933F5}.Release|Win32.Build.0 = Release|Win32
 		{23D66574-48C0-40EC-8F4D-4CB602F933F5}.Release|x64.ActiveCfg = Release|x64
 		{23D66574-48C0-40EC-8F4D-4CB602F933F5}.Release|x64.Build.0 = Release|x64
+		{4AE8FFCE-E915-4B8B-B881-880899864D8E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4AE8FFCE-E915-4B8B-B881-880899864D8E}.Debug|Win32.Build.0 = Debug|Win32
+		{4AE8FFCE-E915-4B8B-B881-880899864D8E}.Debug|x64.ActiveCfg = Debug|x64
+		{4AE8FFCE-E915-4B8B-B881-880899864D8E}.Debug|x64.Build.0 = Debug|x64
+		{4AE8FFCE-E915-4B8B-B881-880899864D8E}.Release|Win32.ActiveCfg = Release|Win32
+		{4AE8FFCE-E915-4B8B-B881-880899864D8E}.Release|Win32.Build.0 = Release|Win32
+		{4AE8FFCE-E915-4B8B-B881-880899864D8E}.Release|x64.ActiveCfg = Release|x64
+		{4AE8FFCE-E915-4B8B-B881-880899864D8E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
