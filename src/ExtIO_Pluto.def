@@ -2,7 +2,7 @@ EXPORTS
     InitHW
     OpenHW
     StartHW
-;	StartHW64
+	StartHW64
     StopHW
     CloseHW
     SetHWLO

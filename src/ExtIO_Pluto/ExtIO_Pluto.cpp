@@ -35,13 +35,26 @@
 #endif
 #pragma comment(lib, "comctl32.lib")
 
+#pragma warning(disable : 4996)
+
+#define snprintf _snprintf
+
+static char gSDR_uri[64] = "usb:\0";
+
+pfnExtIOCallback gCallback = 0;
+volatile bool    gExitThread = false;
+volatile bool    gThreadRunning = false;
+
+HMODULE gDllInstance = NULL;
+HWND gHWND_Dlg = NULL;
+HWND gHWND_Host = NULL;
+
 
 #ifdef  CONSOLE_DEBUG
 #define ErrPrintf(msg) printf(msg "\n");
 #else
-#define ErrPrintf(msg) MessageBoxA(NULL, msg, NULL, MB_OK | MB_ICONERROR) 
+#define ErrPrintf(msg) MessageBoxA(gHWND_Host, msg, NULL, MB_OK | MB_ICONERROR) 
 #endif
-
 
 
 struct
@@ -55,12 +68,14 @@ struct
    iio_channel* m_conf_rx;
    iio_channel* m_conf_LO; // Local Oscillator
 
+   bool m_init_value;
    int m_gain_min;
    int m_gain_max;
    int m_gain_step;
 
    int64_t m_lo_min;
    int64_t m_lo_max;
+   int64_t m_lo_val;
 
    bool m_settings_valid;
    uint32_t m_sample_rate_id;
@@ -69,16 +84,20 @@ struct
    bool     m_fix_quadrature;
    char     m_gain[64];
    int16_t  m_gain_manual;
+   char     m_gain_list[256];
 
    void Init()
    {
        m_ctx = NULL;
        m_rxbuf = NULL;
+
+       m_init_value = false;
        m_gain_min = -1;
        m_gain_max = 71;
        m_gain_step = 1;
        m_lo_min = 70000000;
        m_lo_max = 6000000000;
+       m_lo_val = m_lo_min;
 
        m_settings_valid = false;
 
@@ -86,6 +105,8 @@ struct
        m_sample_rate = 2500000;
        m_gain_manual = 25;
        strcpy(m_gain, "manual");
+       strcpy(m_gain_list, "manual");
+
        m_fix_dc_offset = true;
        m_fix_quadrature = false;
    }
@@ -121,12 +142,7 @@ struct
        if(test)
            return m_ctx != NULL;
        if(m_ctx == NULL)
-       {
-           char txt[128];
-           sprintf(txt, "Connection failed!\r\nPluto URI: %s", uri);
-           MessageBoxA(NULL, txt, "Error", MB_OK | MB_ICONERROR);
            return false;
-       };
        m_rx = iio_context_find_device(m_ctx, "cf-ad9361-lpc");
        if(m_rx == NULL)
        {
@@ -220,26 +236,58 @@ struct
 #ifdef CONSOLE_DEBUG
        printf("rx0_q device found  'cf-ad9361-lpc : voltage1'\n");
 #endif
+       if(!m_init_value)
+       {
+           char attr_buf[256];
+
+           if(iio_channel_attr_read(m_conf_rx, "hardwaregain_available", attr_buf, sizeof(attr_buf)) > 0)
+           {
+               float f_min, f_step = 0, f_max;
+               if(sscanf(attr_buf, "[%f %f %f]", &f_min, &f_step, &f_max) == 3)
+               {
+
+                   m_gain_min  = (int)f_min;
+                   m_gain_max  = (int)f_max;
+                   m_gain_step = (int)f_step;
+               }
+           }
+           if(iio_channel_attr_read(m_conf_LO, "frequency_available", attr_buf, sizeof(attr_buf)) > 0)
+           {
+               double min_f, step_f, max_f;
+               if(sscanf(attr_buf, "[%lf %lf %lf]", &min_f, &step_f, &max_f) == 3)
+               {
+                   m_lo_min = (int64_t)min_f;
+                   m_lo_max = (int64_t)max_f;
+               }
+           }
+           if(iio_channel_attr_read(gIIO.m_conf_rx, "gain_control_mode_available", attr_buf, sizeof(attr_buf)) > 0)
+           {
+               strcpy(gIIO.m_gain_list, attr_buf);
+           }
+
+           if(!m_settings_valid)
+           {
+               double val;
+               char txt[64];
+               iio_channel_attr_read(m_conf_rx, "gain_control_mode", gIIO.m_gain, sizeof(gIIO.m_gain));
+
+               iio_channel_attr_read(m_conf_rx, "hardwaregain", txt, sizeof(txt));
+               if(sscanf(txt, "%lf", &val) == 1)
+                   m_gain_manual = (int16_t)val;
+               bool b;
+               if(iio_channel_attr_read_bool(m_conf_rx, "bb_dc_offset_tracking_en", &b) == 0)
+                   m_fix_dc_offset = b;
+               if(iio_channel_attr_read_bool(m_conf_rx, "quadrature_tracking_en", &b) == 0)
+                   m_fix_quadrature = b;
+           }
+           m_init_value = true;
+       }
        return true;
    }
 
 
 }gIIO;
 
-
-
-#pragma warning(disable : 4996)
-
-#define snprintf _snprintf
-
-static char gSDR_uri[64] = "usb:\0";
-
-pfnExtIOCallback gCallback = 0;
-volatile bool    gExitThread = false;
-volatile bool    gThreadRunning = false;
-
-HMODULE gDllInstance = NULL;
-HWND gHWND_Dlg = NULL;
 
 
 static void UpdateDialog()
@@ -265,57 +313,26 @@ static void UpdateDialog()
     }
 
     static bool init = false;
-    if(!init)
+    if(!init && gIIO.m_init_value)
     {
         init = true;
-        char attr_buf[256];
-        ssize_t ret = iio_channel_attr_read(gIIO.m_conf_rx, "gain_control_mode_available", attr_buf, sizeof(attr_buf));
-        if(ret > 0)
         {
+            char *attr_buf = gIIO.m_gain_list;
+            size_t len = strlen(attr_buf);
             size_t start = 0;
-            for(size_t i = 0; i < (size_t)ret; i++)
+            for(size_t i = 0; i < len; i++)
             {
                 if(attr_buf[i] == ' ')
                 {
                     attr_buf[i] = 0;
                     SendDlgItemMessageA(gHWND_Dlg, IDC_COMBO_GAIN, CB_ADDSTRING, 0, (LPARAM)&attr_buf[start]);
+                    attr_buf[i] = ' ';
                     start = i+1;
                 }
             }
-            if(start < (size_t)ret)
+            if(start < len)
                 SendDlgItemMessageA(gHWND_Dlg, IDC_COMBO_GAIN, CB_ADDSTRING, 0, (LPARAM)&attr_buf[start]);
-        }
-        if(iio_channel_attr_read(gIIO.m_conf_rx, "hardwaregain_available", attr_buf, sizeof(attr_buf)) > 0)
-        {
-            float f_min, f_step = 0, f_max;
-            if(sscanf(attr_buf, "[%f %f %f]", &f_min, &f_step, &f_max) == 3)
-            {
-
-                gIIO.m_gain_min  = (int)f_min;
-                gIIO.m_gain_max  = (int)f_max;
-                gIIO.m_gain_step = (int)f_step;
-            }
-        }
-        if(iio_channel_attr_read(gIIO.m_conf_LO, "frequency_available", attr_buf, sizeof(attr_buf)) > 0)
-        {
-            double min_f, step_f, max_f;
-            if(sscanf(attr_buf, "[%lf %lf %lf]", &min_f, &step_f, &max_f) == 3)
-            {
-                gIIO.m_lo_min = (int64_t)min_f;
-                gIIO.m_lo_max = (int64_t)max_f;
-            }
-        }
-        if(!gIIO.m_settings_valid)
-        {
-            double val;
-            iio_channel_attr_read(gIIO.m_conf_rx, "gain_control_mode", gIIO.m_gain, sizeof(gIIO.m_gain));
-            if(iio_channel_attr_read_double(gIIO.m_conf_rx, "hardwaregain", &val) >= 0)
-                gIIO.m_gain_manual = (int16_t)val;
-            bool b;
-            if(iio_channel_attr_read_bool(gIIO.m_conf_rx, "bb_dc_offset_tracking_en", &b) == 0)
-                gIIO.m_fix_dc_offset = b;
-            if(iio_channel_attr_read_bool(gIIO.m_conf_rx, "quadrature_tracking_en", &b) == 0)
-                gIIO.m_fix_quadrature = b;
+            SendDlgItemMessageA(gHWND_Dlg, IDC_COMBO_GAIN, CB_SETMINVISIBLE, (WPARAM)4, 0);
         }
 
         SendDlgItemMessageA(gHWND_Dlg, IDC_COMBO_GAIN, CB_SELECTSTRING, (WPARAM)-1, (LPARAM)gIIO.m_gain);
@@ -542,6 +559,18 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 }
 
 
+static void UpdateHostWnd()
+{
+    if(gHWND_Host != NULL)
+        return;
+    gHWND_Host = GetActiveWindow();
+    if(!gHWND_Host)
+        gHWND_Host = GetForegroundWindow();
+    if(gHWND_Dlg != NULL)
+       SetWindowLongPtrA(gHWND_Dlg, GWLP_HWNDPARENT, (LONG_PTR)gHWND_Host);
+}
+
+
 extern "C" bool EXTIO_API InitHW(char *name, char *model, int& type)
 {
 #ifdef CONSOLE_DEBUG
@@ -556,15 +585,15 @@ extern "C" bool EXTIO_API InitHW(char *name, char *model, int& type)
 
     type = exthwUSBdata16;
     strcpy(name, "PlutoSDR");
-    strcpy(model, "PlutoSDR");
+    strcpy(model, "Adalm-Pluto");
 
     if(!gIIO.isOpen())
     {
         if(!gIIO.Open(gSDR_uri, false))
         {
-            char txt[128];
-            sprintf(txt, "Connection failed!\r\nInitHW\r\nPluto URI: %s", gSDR_uri);
-            MessageBoxA(NULL, txt, "Error", MB_OK | MB_ICONERROR);
+       //     char txt[128];
+      //      sprintf(txt, "Connection failed!\r\nInitHW\r\nPluto URI: %s", gSDR_uri);
+         //   MessageBoxA(NULL, txt, "Error", MB_OK | MB_ICONERROR);
             // return false;
         };
     }
@@ -574,10 +603,6 @@ extern "C" bool EXTIO_API InitHW(char *name, char *model, int& type)
 
 extern "C" bool EXTIO_API OpenHW(void)
 {
-    if(!gHWND_Dlg)
-        CreateDialogA(gDllInstance, MAKEINTRESOURCE(ExtIO_PlutoDialog), NULL, (DLGPROC)MainDlgProc);
-    if(gHWND_Dlg)
-        ShowWindow(gHWND_Dlg, SW_HIDE);
     return true;
 }
 
@@ -591,14 +616,19 @@ extern "C" int EXTIO_API StartHW(long LOfreq)
 extern "C" int64_t EXTIO_API StartHW64(int64_t LOfreq)
 {
     stopThread();
-
+    UpdateHostWnd();
 #ifdef CONSOLE_DEBUG
     printf("StartHW uri: %s\n", gSDR_uri);
 #endif
     if (!gIIO.isOpen())
     {
         if(!gIIO.Open(gSDR_uri, false))
-            return 0;
+        {
+            char txt[128];
+            sprintf(txt, "Connection failed!\r\nPluto URI: %s", gSDR_uri);
+            MessageBoxA(gHWND_Host, txt, "Error", MB_OK | MB_ICONERROR);
+            return -1;
+        }
     }
 
     // setting reciever
@@ -610,8 +640,11 @@ extern "C" int64_t EXTIO_API StartHW64(int64_t LOfreq)
         ErrPrintf("sampling_frequency failed");
     if(iio_channel_attr_write(gIIO.m_conf_rx, "gain_control_mode", gIIO.m_gain) < 0)
         ErrPrintf("gain_control_mode failed");
-    if(iio_channel_attr_write_double(gIIO.m_conf_rx, "hardwaregain", gIIO.m_gain_manual) < 0)
-        ErrPrintf("hardwaregain failed");
+    if(!strcmp(gIIO.m_gain, "manual"))
+    {
+        if(iio_channel_attr_write_double(gIIO.m_conf_rx, "hardwaregain", gIIO.m_gain_manual) < 0)
+            ErrPrintf("hardwaregain failed");
+    }
     iio_channel_attr_write_bool(gIIO.m_conf_rx, "bb_dc_offset_tracking_en", gIIO.m_fix_dc_offset);
     iio_channel_attr_write_bool(gIIO.m_conf_rx, "rf_dc_offset_tracking_en", gIIO.m_fix_dc_offset);
     iio_channel_attr_write_bool(gIIO.m_conf_rx, "quadrature_tracking_en", gIIO.m_fix_quadrature);
@@ -619,6 +652,7 @@ extern "C" int64_t EXTIO_API StartHW64(int64_t LOfreq)
     // setting LO
     if(iio_channel_attr_write_longlong(gIIO.m_conf_LO, "frequency", LOfreq) < 0)
         ErrPrintf("frequency set failed");
+    gIIO.m_lo_val = LOfreq;
 
     // Enabling IIO streaming channels
     iio_channel_enable(gIIO.m_rx0_i);
@@ -632,7 +666,7 @@ extern "C" int64_t EXTIO_API StartHW64(int64_t LOfreq)
             iio_channel_disable(gIIO.m_rx0_i);
         if (gIIO.m_rx0_q)
             iio_channel_disable(gIIO.m_rx0_q);
-        return 0;
+        return -1;
     }
 #ifdef CONSOLE_DEBUG
     printf("rxbuf created\n");
@@ -696,13 +730,14 @@ extern "C" int64_t EXTIO_API SetHWLO64(int64_t LOfreq)
     }
     if (wishedLO != LOfreq && gCallback)
         gCallback(-1, extHw_Changed_LO, 0.0F, 0);
+    gIIO.m_lo_val = LOfreq;
     return ret;
 }
 
 
 extern "C" int EXTIO_API GetStatus()
 {
-    return 0;  
+    return 0;
 }
 
 
@@ -729,7 +764,7 @@ extern "C" int64_t EXTIO_API GetHWLO64()
             ErrPrintf("frequency read failed");
         return frq;
     }
-    return gIIO.m_lo_min;
+    return gIIO.m_lo_val;
 }
 
 
@@ -876,8 +911,10 @@ extern "C" void EXTIO_API ExtIoSetSetting(int idx, const char * value)
 
 extern "C" void EXTIO_API ShowGUI()
 {
+    UpdateHostWnd();
+    if(!gHWND_Dlg)
+        CreateDialogA(gDllInstance, MAKEINTRESOURCE(ExtIO_PlutoDialog), gHWND_Host, (DLGPROC)MainDlgProc);
     ShowWindow(gHWND_Dlg, SW_SHOW);
-    
     SetFocus(GetDlgItem(gHWND_Dlg, gIIO.isOpen()?IDC_COMBO_GAIN:IDC_COMBO_SDR));
 }
 
