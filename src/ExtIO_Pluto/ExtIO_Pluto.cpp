@@ -1,6 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-
 #include <windows.h>
 #include <windowsx.h>
 #include <string.h>
@@ -17,23 +16,23 @@
 #define EXT_BLOCKLEN   512 * 4
 
 
-#pragma comment(lib, "ws2_32.lib")
-#pragma comment(lib, "Iphlpapi.lib")
-
-#pragma comment(lib, "legacy_stdio_definitions.lib")
-
 #ifdef _DEBUG
   #define CONSOLE_DEBUG // Activate a debug console
 #else
 
-#ifdef _WIN64
-//#pragma comment(lib, "../lib/msvcrt_64.lib")
-#else
-#pragma comment(lib, "../lib/msvcrt_32.lib")
+  #ifdef _WIN64
+    #pragma comment(lib, "../lib/msvcrt_64.lib")
+    BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved);
+    extern "C" BOOL APIENTRY _DllMainCRTStartup(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved){ return DllMain(hModule, ul_reason_for_call, lpReserved); }
+  #else
+    #pragma comment(lib, "../lib/msvcrt_32.lib")
+  #endif
 #endif
 
-#endif
+#pragma comment(lib, "legacy_stdio_definitions.lib")
 #pragma comment(lib, "comctl32.lib")
+#pragma comment(lib, "ws2_32.lib")
+#pragma comment(lib, "Iphlpapi.lib")
 
 #pragma warning(disable : 4996)
 

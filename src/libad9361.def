@@ -1,0 +1,13 @@
+LIBRARY "libad9361.dll"
+EXPORTS
+    ad9361_calculate_rf_clock_chain
+    ad9361_calculate_rf_clock_chain_fdp
+    ad9361_fmcomms5_multichip_sync
+    ad9361_fmcomms5_phase_sync
+    ad9361_generate_fir_taps
+    ad9361_get_trx_fir_enable
+    ad9361_multichip_sync
+    ad9361_set_bb_rate
+    ad9361_set_bb_rate_custom_filter_auto
+    ad9361_set_bb_rate_custom_filter_manual
+    ad9361_set_trx_fir_enable

@@ -1,3 +1,4 @@
+LIBRARY "ExtIO_Pluto.dll"
 EXPORTS
     InitHW
     OpenHW

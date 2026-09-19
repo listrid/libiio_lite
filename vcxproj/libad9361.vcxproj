@@ -19,27 +19,42 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\ExtIO_Pluto\ExtIO_Pluto.cpp" />
+    <None Include="..\src\libad9361.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\ad9361.h" />
-    <ClInclude Include="..\include\iio.h" />
-    <ClInclude Include="..\src\ExtIO_Pluto\ExtIO_Pluto.h" />
-    <ClInclude Include="..\src\ExtIO_Pluto\LC_ExtIO_Types.h" />
-    <ClInclude Include="..\src\ExtIO_Pluto\resource.h" />
+    <ClInclude Include="..\src\libad9361\ad9361.h" />
+    <ClInclude Include="..\src\libad9361\filterdesigner\internal_design_filter_cg.h" />
+    <ClInclude Include="..\src\libad9361\filterdesigner\internal_design_filter_cg_emxutil.h" />
+    <ClInclude Include="..\src\libad9361\filterdesigner\internal_design_filter_cg_types.h" />
+    <ClInclude Include="..\src\libad9361\filterdesigner\rtGetInf.h" />
+    <ClInclude Include="..\src\libad9361\filterdesigner\rtGetNaN.h" />
+    <ClInclude Include="..\src\libad9361\filterdesigner\rtwtypes.h" />
+    <ClInclude Include="..\src\libad9361\filterdesigner\rt_defines.h" />
+    <ClInclude Include="..\src\libad9361\filterdesigner\rt_nonfinite.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\src\ExtIO_Pluto\resource.rc" />
+    <ClCompile Include="..\src\libad9361\ad9361_baseband_auto_rate.c" />
+    <ClCompile Include="..\src\libad9361\ad9361_calculate_rf_clock_chain.c" />
+    <ClCompile Include="..\src\libad9361\ad9361_design_taps.c" />
+    <ClCompile Include="..\src\libad9361\ad9361_fmcomms5_phase_sync.c" />
+    <ClCompile Include="..\src\libad9361\ad9361_multichip_sync.c" />
+    <ClCompile Include="..\src\libad9361\filterdesigner\internal_design_filter_cg.c" />
+    <ClCompile Include="..\src\libad9361\filterdesigner\internal_design_filter_cg_emxutil.c" />
+    <ClCompile Include="..\src\libad9361\filterdesigner\rtGetInf.c" />
+    <ClCompile Include="..\src\libad9361\filterdesigner\rtGetNaN.c" />
+    <ClCompile Include="..\src\libad9361\filterdesigner\rt_nonfinite.c" />
+    <ClCompile Include="..\src\main_libiio.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="libiio_static.vcxproj">
-      <Project>{2b0b2844-ef03-44ec-864e-9eb02bcabbd9}</Project>
+    <ProjectReference Include="libiio.vcxproj">
+      <Project>{a375005e-2fc8-4aee-94e6-7714251e2fe8}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4AE8FFCE-E915-4B8B-B881-880899864D8E}</ProjectGuid>
+    <ProjectGuid>{00BC508C-5156-4D11-B1AC-436406489DDF}</ProjectGuid>
     <Keyword>Win64Proj</Keyword>
-    <RootNamespace>libiio</RootNamespace>
+    <RootNamespace>libad9361</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -113,13 +128,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>EXTIO_EXPORTS;LIBIIO_STATIC;WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBAD9361_EXPORTS;WIN32;_DEBUG;_WINDOWS;_USRDLL;DLL_PROJ_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>..\src\ExtIO_Pluto.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>..\src\libad9361.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -127,13 +142,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>EXTIO_EXPORTS;LIBIIO_STATIC;WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBAD9361_EXPORTS;WIN32;_DEBUG;_WINDOWS;_USRDLL;DLL_PROJ_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>..\src\ExtIO_Pluto.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>..\src\libad9361.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,7 +157,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PreprocessorDefinitions>_NO_CRT_STDIO_INLINE ;EXTIO_EXPORTS;LIBIIO_STATIC;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_NO_CRT_STDIO_INLINE ;LIBAD9361_EXPORTS;WIN32;NDEBUG;_WINDOWS;_USRDLL;DLL_PROJ_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ExceptionHandling>false</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -154,10 +169,10 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ModuleDefinitionFile>..\src\ExtIO_Pluto.def</ModuleDefinitionFile>
-      <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>..\src\libad9361.def</ModuleDefinitionFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
       <NoEntryPoint>false</NoEntryPoint>
-      <AdditionalDependencies>../lib/msvcrt_64.lib;legacy_stdio_definitions.lib;ucrt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -166,7 +181,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PreprocessorDefinitions>_NO_CRT_STDIO_INLINE ;EXTIO_EXPORTS;LIBIIO_STATIC;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_NO_CRT_STDIO_INLINE ;LIBAD9361_EXPORTS;WIN32;NDEBUG;_WINDOWS;_USRDLL;DLL_PROJ_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../include;../src/Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ExceptionHandling>false</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -178,7 +193,7 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ModuleDefinitionFile>..\src\ExtIO_Pluto.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>..\src\libad9361.def</ModuleDefinitionFile>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <NoEntryPoint>false</NoEntryPoint>

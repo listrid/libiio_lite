@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src\filterdesigner">
+      <UniqueIdentifier>{cdb4ddd2-19de-4538-a922-7772d7b9918a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\libad9361.def">
+      <Filter>src</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\libad9361\ad9361.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\libad9361\filterdesigner\internal_design_filter_cg.h">
+      <Filter>src\filterdesigner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\libad9361\filterdesigner\internal_design_filter_cg_emxutil.h">
+      <Filter>src\filterdesigner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\libad9361\filterdesigner\internal_design_filter_cg_types.h">
+      <Filter>src\filterdesigner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\libad9361\filterdesigner\rt_defines.h">
+      <Filter>src\filterdesigner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\libad9361\filterdesigner\rt_nonfinite.h">
+      <Filter>src\filterdesigner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\libad9361\filterdesigner\rtGetInf.h">
+      <Filter>src\filterdesigner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\libad9361\filterdesigner\rtGetNaN.h">
+      <Filter>src\filterdesigner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\libad9361\filterdesigner\rtwtypes.h">
+      <Filter>src\filterdesigner</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\libad9361\ad9361_baseband_auto_rate.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\libad9361\ad9361_calculate_rf_clock_chain.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\libad9361\ad9361_design_taps.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\libad9361\ad9361_fmcomms5_phase_sync.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\libad9361\ad9361_multichip_sync.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\libad9361\filterdesigner\internal_design_filter_cg.c">
+      <Filter>src\filterdesigner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\libad9361\filterdesigner\internal_design_filter_cg_emxutil.c">
+      <Filter>src\filterdesigner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\libad9361\filterdesigner\rt_nonfinite.c">
+      <Filter>src\filterdesigner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\libad9361\filterdesigner\rtGetInf.c">
+      <Filter>src\filterdesigner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\libad9361\filterdesigner\rtGetNaN.c">
+      <Filter>src\filterdesigner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main_libiio.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
