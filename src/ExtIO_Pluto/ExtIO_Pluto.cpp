@@ -21,11 +21,11 @@
 #else
 
   #ifdef _WIN64
-    #pragma comment(lib, "../lib/msvcrt_64.lib")
+    #pragma comment(lib, "../lib/vcruntime_64.lib")
     BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved);
     extern "C" BOOL APIENTRY _DllMainCRTStartup(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved){ return DllMain(hModule, ul_reason_for_call, lpReserved); }
   #else
-    #pragma comment(lib, "../lib/msvcrt_32.lib")
+    #pragma comment(lib, "../lib/vcruntime_32.lib")
   #endif
 #endif
 

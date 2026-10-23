@@ -1,5 +1,8 @@
 /build/
 /.vs/
+/.zig-cache/
+/zig-out/
+/root_target/
 *.vcxproj.user
 *.suo
 *.tss

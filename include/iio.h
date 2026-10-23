@@ -69,10 +69,12 @@ typedef ptrdiff_t ssize_t;
 #   else
 #	define __api __declspec(dllimport)
 #   endif
-#elif __GNUC__ >= 4 && !defined(MATLAB_MEX_FILE) && !defined(MATLAB_LOADLIBRARY)
+#elif defined(__GNUC__)
+#   ifdef LIBIIO_EXPORTS
 #   define __api __attribute__((visibility ("default")))
-#else
+#   else
 #   define __api
+#   endif
 #endif
 
 struct iio_context;

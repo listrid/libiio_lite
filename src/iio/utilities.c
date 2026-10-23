@@ -352,6 +352,10 @@ wrong_str:
 	return NULL;
 }
 
+#ifndef _WIN32
+#define _vsnprintf vsnprintf
+#endif
+
 ssize_t __iio_printf iio_snprintf(char *buf, size_t len, const char *fmt, ...)
 {
 	va_list ap;

@@ -193,7 +193,7 @@ static struct iio_channel* create_channel(struct iio_device *dev, tdXML::NODE *n
 
 	/* Set the default index value < 0 (== no index) */
 	chn->index = -ENOENT;
-
+	tdXML::NODE* n_t = NULL;
 	for (i = 0; i < n->m_attributes_count; i++) {
 		attr = &n->m_attributes[i];
 		const char *name = (const char *) attr->m_name,
@@ -222,7 +222,7 @@ static struct iio_channel* create_channel(struct iio_device *dev, tdXML::NODE *n
 		err = -EINVAL;
 		goto err_free_channel;
 	}
-	tdXML::NODE* n_t = n;
+    n_t = n;
 	for(i = 0; i < n_t->m_childs_count; i++) {
 		n = &n_t->m_childs[i];
 		if (!strcmp((char *) n->m_name, "attribute")) {
@@ -261,7 +261,7 @@ static struct iio_device * create_device(struct iio_context *ctx, tdXML::NODE *n
 		return (iio_device*)ERR_PTR(-ENOMEM);
 
 	dev->ctx = ctx;
-
+	tdXML::NODE* n_t = NULL;
 	for (i = 0; i < n->m_attributes_count; i++) {
 		attr = &n->m_attributes[i];
 		if (!strcmp((char *) attr->m_name, "name")) {
@@ -288,7 +288,7 @@ static struct iio_device * create_device(struct iio_context *ctx, tdXML::NODE *n
 		err = -EINVAL;
 		goto err_free_device;
 	}
-    tdXML::NODE* n_t = n;
+    n_t = n;
     for(i = 0; i < n_t->m_childs_count; i++) {
         n = &n_t->m_childs[i];
 		if (!strcmp((char *) n->m_name, "channel")) {

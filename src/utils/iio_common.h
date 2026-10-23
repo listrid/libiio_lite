@@ -10,7 +10,11 @@
 #define IIO_TESTS_COMMON_H
 
 #include <stdint.h>
+#ifdef _WIN32
 #include "wingetopt/getopt.h"
+#else
+#include <getopt.h>
+#endif
 #include <iio.h>
 
 /*

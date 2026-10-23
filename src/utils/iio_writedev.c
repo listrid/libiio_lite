@@ -24,6 +24,8 @@
 
 #include "iio_common.h"
 
+#ifdef _WIN32
+
 #ifdef _DEBUG
 #ifdef _WIN64
 #pragma comment(lib, "../build/Debug_x64/libiio.lib")
@@ -38,14 +40,12 @@
 #endif
 #endif
 #ifdef _WIN64
-#pragma comment(lib, "../lib/msvcrt_64.lib")
+#  pragma comment(lib, "../lib/vcruntime_64.lib")
 #else
-#pragma comment(lib, "../lib/msvcrt_32.lib")
+#  pragma comment(lib, "../lib/vcruntime_32.lib")
 #endif
 #pragma comment(lib, "legacy_stdio_definitions.lib")
-void** __cdecl __current_exception(void){ return NULL; }
-void** __cdecl __current_exception_context(){ return NULL; };
-
+#endif
 
 #define MY_NAME "iio_writedev"
 
