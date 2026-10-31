@@ -19,20 +19,12 @@
 #ifdef _DEBUG
   #define CONSOLE_DEBUG // Activate a debug console
 #else
-
   #ifdef _WIN64
-    #pragma comment(lib, "../lib/vcruntime_64.lib")
     BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved);
     extern "C" BOOL APIENTRY _DllMainCRTStartup(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved){ return DllMain(hModule, ul_reason_for_call, lpReserved); }
-  #else
-    #pragma comment(lib, "../lib/vcruntime_32.lib")
   #endif
 #endif
 
-#pragma comment(lib, "legacy_stdio_definitions.lib")
-#pragma comment(lib, "comctl32.lib")
-#pragma comment(lib, "ws2_32.lib")
-#pragma comment(lib, "Iphlpapi.lib")
 
 #pragma warning(disable : 4996)
 
@@ -923,33 +915,3 @@ extern "C" void EXTIO_API HideGUI()
     ShowWindow(gHWND_Dlg, SW_HIDE);
 }
 
-
-
-//fix no runtime VC 2022
-
-#include <vcruntime_string.h>
-#include <vcruntime_typeinfo.h>
-
-struct __type_info_node
-{
-    _SLIST_HEADER _Header;
-};
-#define _free_crt     free
-
-extern "C" void __cdecl __std_type_info_destroy_list(
-    __type_info_node* const root_node
-)
-{
-    PSLIST_ENTRY current_node = InterlockedFlushSList(&root_node->_Header);
-    while(current_node)
-    {
-        PSLIST_ENTRY const next_node = current_node->Next;
-        _free_crt(current_node);
-        current_node = next_node;
-    }
-}
-
-
-extern "C" int _except_handler4_common() { return 0; }
-
-//_except_handler4_common
